@@ -1,5 +1,7 @@
 # Colab Studio — Google Colab GPU 视频生成工作台控制台
 
+**简体中文** | [English](./README_EN.md)
+
 > **本地轻量控制面 + 云端 Colab GPU 算力**：专为 AI 视频生成（ComfyUI / Wan2.1 / MiniMax-H3）打造的跨平台自研控制台，内置防烧钱看门狗、网页实例一键接管、SSH 断线自动重连、批量工作流队列与电影级中文字幕硬烧录。
 
 ---
