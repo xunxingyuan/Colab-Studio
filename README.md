@@ -4,6 +4,18 @@
 
 ---
 
+## 界面预览
+
+| 算力总览（L4 托管 + 看门狗倒计时） | 极速部署中心（ComfyUI / Wan2.1 / MiniMax-H3） |
+| --- | --- |
+| ![算力总览](docs/promo_assets/01_dashboard_l4_watchdog.png) | ![极速部署](docs/promo_assets/02_deploy_studio.png) |
+
+| 批量 ComfyUI 工作流队列 & 中文字幕压制台 | 本地视频成品库（支持在线播放与 SHA256 校验） |
+| --- | --- |
+| ![批量队列与字幕](docs/promo_assets/03_batch_queue_subtitles.png) | ![本地成品库](docs/promo_assets/04_outputs_gallery.png) |
+
+---
+
 ## 核心特性
 
 - **一等公民「网页实例接管 + 补挂看门狗」**
