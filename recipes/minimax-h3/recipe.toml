@@ -1,0 +1,49 @@
+id = "minimax-h3"
+name = "MiniMax-H3 视频人物替换工作台 (G4 96GB)"
+description = "面向 Colab G4 / A100 80GB 大显存卡优化的视频人物替换与音画同步工作台，自动部署 ComfyUI 节点并映射 8188 端口。"
+version = "1.0.0"
+category = "video"
+tags = ["MiniMax-H3", "G4 96GB", "CharacterSwap", "8188"]
+needs = ["hf_token"]
+output_dir = "/content/ComfyUI/output"
+
+[provision]
+accelerator = "G4"
+min_vram_mib = 75000
+high_mem = true
+
+[run]
+script = "worker.py"
+
+[[inputs]]
+id = "download_audio_vae"
+type = "bool"
+label = "启用原生 Audio VAE 音画口型联动"
+default = true
+
+[[inputs]]
+id = "port"
+type = "number"
+label = "服务端口"
+default = 8188
+min = 1024
+max = 65535
+
+[[stages]]
+id = "setup"
+label = "初始化 ComfyUI 与 CUDA 加速依赖"
+
+[[stages]]
+id = "models"
+label = "并发拉取 MiniMax-H3 核心权重"
+
+[[stages]]
+id = "server"
+label = "启动工作台服务"
+
+[[endpoints]]
+id = "webui"
+label = "MiniMax-H3 ComfyUI 工作台"
+port_input = "port"
+path = "/"
+health = "/system_stats"

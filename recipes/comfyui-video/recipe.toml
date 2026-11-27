@@ -1,0 +1,57 @@
+id = "comfyui-video"
+name = "ComfyUI 视频生成工作台 (Wan2.1 / LTX)"
+description = "在 Colab T4/L4/A100 上极速部署 ComfyUI + Manager，复用系统 CUDA PyTorch，可选一键预拉取 Wan2.1-T2V-1.3B 权重并将 8188 端口映射回本地。"
+version = "1.0.0"
+category = "video"
+tags = ["ComfyUI", "Wan2.1", "T2V / I2V", "8188"]
+needs = ["hf_token"]
+output_dir = "/content/ComfyUI/output"
+
+[provision]
+accelerator = "L4"
+min_vram_mib = 14000
+high_mem = false
+
+[run]
+script = "worker.py"
+
+[[inputs]]
+id = "preset_model"
+type = "select"
+label = "预装视频模型预设"
+help = "选择 wan21_1.3b 将自动并发拉取 9.8GB 权重（T4 16GB 即可流畅出片）；选 none 则秒启纯净 ComfyUI"
+default = "wan21_1.3b"
+options = ["wan21_1.3b", "none"]
+
+[[inputs]]
+id = "install_manager"
+type = "bool"
+label = "安装 ComfyUI-Manager 插件管理器"
+default = true
+
+[[inputs]]
+id = "port"
+type = "number"
+label = "ComfyUI 服务端口"
+default = 8188
+min = 1024
+max = 65535
+
+[[stages]]
+id = "setup"
+label = "安装 ComfyUI 与依赖"
+
+[[stages]]
+id = "models"
+label = "并发拉取视频模型权重"
+
+[[stages]]
+id = "server"
+label = "启动 ComfyUI 并开放 8188"
+
+[[endpoints]]
+id = "webui"
+label = "ComfyUI 可视化工作流界面"
+port_input = "port"
+path = "/"
+health = "/system_stats"
